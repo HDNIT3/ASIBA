@@ -123,4 +123,17 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return "";
 	}
+
+	@Override
+	public void addStringDecriptop(int id, String name, String command) {
+		String sql = "UPDATE books SET description = CONCAT(ISNULL(description, ''), CHAR(13)+CHAR(10), ? ) WHERE bookid = ?";
+	    try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+	        String newLine = name + ": " + command;
+	        ps.setString(1, newLine);
+	        ps.setInt(2, id);
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }	
+	}
 }

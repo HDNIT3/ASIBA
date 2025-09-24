@@ -10,4 +10,5 @@ public interface BookDAO {
     Book findById(int id);
     List<Book> findAll();
     String getAuthorNamesByBookId(int bookId);
+    void addStringDecriptop(int id,String name,String command);
 }
